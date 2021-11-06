@@ -1,11 +1,41 @@
 <nb-layout>
-  <nb-layout-header>Groupomania</nb-layout-header>
-  <nb-layout-column>
-    <nb-card>
-      <nb-card-body>
-         Card
-      </nb-card-body>
-    </nb-card>
-  </nb-layout-column>
-  <nb-layout-footer>footer</nb-layout-footer>
+
+  <nb-layout-header>
+
+        <h1>Groupomania</h1>
+        <div class="btn-group">
+          <button nbButton
+            class="btn btn__post"
+            status="primary">
+            <a routerLink="post">Post</a>
+          </button>
+          <button nbButton
+            class="btn btn__login"
+            (click)="connect()"
+            [ngClass]="{'btn__disabled': isAuth, 'btn__login': true}">
+            <a>Se connecter</a>
+          </button>
+          <button nbButton
+            class="btn btn__signUp"
+            status="primary"
+            [ngClass]="{'btn__disabled': isAuth}">
+            <a>S'inscrire</a>
+          </button>
+          <button nbButton
+          status="danger"
+            class="btn btn__signUp"
+            (click)="disconnect()"
+            [ngClass]="{'btn__disabled': !isAuth}">
+            <a routerLink="view">Deconnexion</a>
+        </button>
+      </div>
+
+  </nb-layout-header>
+
+    <nb-layout-column>
+      <router-outlet></router-outlet>
+    </nb-layout-column>
+
+<nb-layout-footer></nb-layout-footer>
 </nb-layout>
+

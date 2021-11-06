@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PostService } from './services/post.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Groupomania';
+  public isAuth: boolean = true;
+  disconnect() {
+    this.isAuth = false;
+  }
+  connect() {
+    this.isAuth = true;
+  }
 }

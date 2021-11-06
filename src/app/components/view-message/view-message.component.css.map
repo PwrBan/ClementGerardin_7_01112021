@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CACP;EACE,MAAM,EAAE,MAAM;CACf",
+    "sources": [
+        "view-message.component.scss"
+    ],
+    "names": [],
+    "file": "view-message.component.css"
+}

@@ -1,0 +1,7 @@
+<nb-card-body class="example-items-col">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <input  name="pseudo" ngModel type="text" nbInput fullWidth fieldSize="small" placeholder="Input">
+  <textarea  name="message" ngModel nbInput fullWidth placeholder="Textarea"></textarea>
+  <button type="submit" [disabled]="f.invalid" nbButton>Envoyer</button>
+  </form>
+</nb-card-body>

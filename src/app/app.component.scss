@@ -1,0 +1,23 @@
+@import 'sass/_variables';
+@import '../themes.scss';
+
+h1
+{
+  justify-self: flex-start;
+}
+.btn-group
+{
+  display: flex;
+}
+.btn
+{
+  margin: 0 5%;
+  &__disabled
+  {
+    display: none;
+  }
+    a{
+      color: white!important;
+      text-decoration: none;
+    }
+}

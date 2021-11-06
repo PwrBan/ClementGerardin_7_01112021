@@ -1,7 +1,7 @@
-export class PostModel {
+export class Post {
   constructor(
     public pseudo: string,
     public message: string,
-    public post_at: Date
+    public posted_at: Date
   ) {}
 }
