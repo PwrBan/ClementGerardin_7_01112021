@@ -9,10 +9,12 @@ import { PostMessageComponent } from './components/post-message/post-message.com
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule, NbLayoutDirection} from '@nebular/theme';
+import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule} from '@nebular/theme';
+
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { ViewMessageComponent } from './components/view-message/view-message.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -20,19 +22,22 @@ import { ViewMessageComponent } from './components/view-message/view-message.com
     AppComponent,
     ViewMessageComponent,
     PostMessageComponent,
+    AuthComponent,
   ],
   imports: [
+    NbUserModule,
+    NbIconModule,
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default'}),
     NbLayoutModule,
-    NbEvaIconsModule,
     NbCardModule,
     AppRoutingModule,
     NbButtonModule,
     RouterModule,
-    NbInputModule
+    NbInputModule,
+    NbFormFieldModule,
   ],
   providers: [PostService],
   bootstrap: [AppComponent]

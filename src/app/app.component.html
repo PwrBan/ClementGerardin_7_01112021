@@ -11,9 +11,8 @@
           </button>
           <button nbButton
             class="btn btn__login"
-            (click)="connect()"
             [ngClass]="{'btn__disabled': isAuth, 'btn__login': true}">
-            <a>Se connecter</a>
+            <a routerLink="auth">Se connecter</a>
           </button>
           <button nbButton
             class="btn btn__signUp"
