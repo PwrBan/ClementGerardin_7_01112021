@@ -1,0 +1,18 @@
+nb-card
+{
+  margin: 5% 10%;
+}
+nb-card-header
+{
+  display: flex;
+  align-items: center;
+  padding: .5rem 1rem;
+  .post__date
+  {
+    font-size: x-small;
+    margin: 0 5%;
+  }
+}
+:host nb-icon{
+  font-size: 1.5em;
+}

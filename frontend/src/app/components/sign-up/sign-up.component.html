@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSignUp(f)" #f="ngForm">
+  <input name="nom" ngModel type="text" nbInput fullWidth shape="round" placeholder="Nom">
+  <input name="prenom" ngModel type="text" nbInput fullWidth shape="round" placeholder="Prenom">
+  <input name="password" ngModel type="text" nbInput fullWidth shape="round" placeholder="Mot de passe">
+  <input name="email" ngModel type="text" nbInput fullWidth shape="round" placeholder="Adresse mail">
+  <button nbButton status="danger">S'inscrire</button>
+</form>

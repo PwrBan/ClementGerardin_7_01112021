@@ -1,9 +1,0 @@
-<nb-layout-column>
-  <nb-card *ngFor="let post of posts">
-    <nb-card-header>{{post.pseudo}}</nb-card-header>
-    <nb-card-body>
-      {{post.message}}
-    </nb-card-body>
-    <nb-card-footer>{{post.posted_at | date}}</nb-card-footer>
-  </nb-card>
-</nb-layout-column>

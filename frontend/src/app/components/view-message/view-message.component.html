@@ -1,0 +1,18 @@
+<nb-layout-column>
+  <nb-card *ngFor="let post of posts$ | async">
+    <nb-card-header>
+      <nb-user size="medium"
+             name="{{post.nom + ' ' + post.prenom}}"
+             color="#cccccc">
+    </nb-user>
+    <span class="post__date">Publié le : {{post.posted_at | date}}</span>
+    </nb-card-header>
+    <nb-card-body>
+      {{post.message}}
+    </nb-card-body>
+    <nb-card-footer>
+      <nb-icon icon="heart-outline"></nb-icon>
+      <button nbButton shape="round" size="small" status="danger" >Supprimer</button>
+    </nb-card-footer>
+  </nb-card>
+</nb-layout-column>

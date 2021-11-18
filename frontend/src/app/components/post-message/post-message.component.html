@@ -1,0 +1,8 @@
+<nb-card-body class="example-items-col">
+  <form enctype="multipart/form-data" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <textarea  name="message" ngModel nbInput fullWidth placeholder="Textarea"></textarea>
+  <input type="hidden" name="MAX_FILE_SIZE" value="250000">
+  <input type="file" name="file" id="" (change)="onFileSelected($event)">
+  <button  type="submit" [disabled]="f.invalid" nbButton>Envoyer</button>
+  </form>
+</nb-card-body>
