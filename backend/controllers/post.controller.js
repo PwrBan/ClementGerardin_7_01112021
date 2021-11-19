@@ -10,14 +10,21 @@ const connection = mysql.createConnection({
   })
 
 exports.createPost = (req, res, next ) => {
-    console.log(req.body);
-    const sql = "INSERT INTO post VALUES (0,?,?,?,?,?)";
-    const inserts = [req.body.userId, req.body.message, new Date, req.body.prenom,req.body.nom];
+    var filePath;
+    if (!req.file) {
+        filePath = null;
+    } else {
+        filePath = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    }
+    const post = JSON.parse(req.body.post);
+    const sql = "INSERT INTO post VALUES (0,?,?,?,?,?,?)";
+    const inserts = [post.userId, post.message, new Date, post.prenom, post.nom, filePath];
     const format = mysql.format(sql, inserts);
     connection.query(format, (err, result, fields) => {
         if(err) res.status(400).json({ message : err });
         res.status(201).json({ message : "Message posté"})
-    });
+        }
+    );
 }
 exports.findAllPosts = (req, res, next) => {
     connection.query('SELECT * FROM post', (err, result, field) => {

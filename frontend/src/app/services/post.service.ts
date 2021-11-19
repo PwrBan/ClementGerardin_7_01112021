@@ -17,12 +17,14 @@ export class PostService {
     .pipe(map((result: any) => result.result || []))
   }
 
-  create(post: Post) {
+  create(post: FormData) {
+    console.log(post);
     this.httpClient
       .post('http://localhost:3000/api/post', post)
       .subscribe(() => {console.log('Enregistrement fini')},
       (error) => { console.log(error);}
-      )}
+    )
+  }
 }
 
 

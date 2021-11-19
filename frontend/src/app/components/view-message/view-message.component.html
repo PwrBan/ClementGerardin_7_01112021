@@ -9,10 +9,11 @@
     </nb-card-header>
     <nb-card-body>
       {{post.message}}
+      <img *ngIf="post.image" src="{{post.image}}" alt="">
     </nb-card-body>
     <nb-card-footer>
       <nb-icon icon="heart-outline"></nb-icon>
-      <button nbButton shape="round" size="small" status="danger" >Supprimer</button>
+      <button nbButton shape="round" size="small" status="danger" *ngIf="userId === post.userId" >Supprimer</button>
     </nb-card-footer>
   </nb-card>
 </nb-layout-column>

@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const mysql = require('mysql');
 const key = fs.readFileSync('./environment/private.key');
 const userRoutes = require('./routes/user.route');
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+app.use('/images', express.static(path.join(__dirname, './images')));
 
 app.use('/api/auth', userRoutes);
 app.use('/api', postRoutes);

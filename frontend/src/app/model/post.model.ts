@@ -4,7 +4,7 @@ export class Post {
   public userId: number;
   public message: string;
   public posted_at: Date;
-  public image: File;
+  public image: FormData;
 
   public constructor(data: Partial<Post> = {}) {
     Object.assign(this , data);

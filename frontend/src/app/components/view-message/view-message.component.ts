@@ -19,8 +19,6 @@ export class ViewMessageComponent implements OnInit{
 
   constructor(private postService : PostService) {
     this.posts$ = this.postService.findAll();
-
-
   }
 
   ngOnInit(){
@@ -31,7 +29,6 @@ export class ViewMessageComponent implements OnInit{
     if(sessionStorage.user){
       this.session = JSON.parse(sessionStorage.user);
       this.userId = this.session.userId;
-      console.log(this.userId);
       }
     }
   }

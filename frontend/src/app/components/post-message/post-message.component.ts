@@ -18,10 +18,10 @@ export class PostMessageComponent {
 
   public onFileSelected(event: any) {
     this.file = event.target.files[0]
+    console.log(this.file);
+
     if(this.file) {
       this.formData.append("thumbnail", this.file)
-      console.log(this.formData);
-
     }
   }
   public onSubmit(form: NgForm) {
@@ -32,12 +32,11 @@ export class PostMessageComponent {
           prenom: session.prenom,
           userId: session.userId,
           message: form.value.message,
-          posted_at: new Date,
-          image: this.file
+          posted_at: new Date
         })
-      console.log(post);
+        this.formData.append("post", JSON.stringify(post))
 
-      this.postService.create(post)
+      this.postService.create(this.formData)
       this.router.navigate(['view'])
   }
 }
