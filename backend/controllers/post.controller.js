@@ -28,8 +28,8 @@ const connection = mysql.createConnection({
     }
 
     exports.createComments = (req, res, next) => {
-        const sql = "INSERT INTO comments VALUES (0,?,?,?)";
-        const inserts = [req.body.userId, req.body.message, new Date];
+        const sql = "INSERT INTO comments VALUES (0,?,?,?,?)";
+        const inserts = [req.body.userId, req.body.message, new Date, req.body.postId];
         const format = mysql.format(sql, inserts);
         connection.query(format, (err, result, field) => {
             if(err) res.status(400).json({ message : err });
@@ -40,7 +40,6 @@ const connection = mysql.createConnection({
     const inserts = req.params.id
     const sql = "SELECT * FROM post WHERE id = ? LIMIT 1"
     const format = mysql.format(sql, inserts);
-    console.log(format);
     connection.query(format, (err, result, fields) => {
         if(err) res.status(400).json({ err });
         res.status(200).json({ result })
@@ -52,3 +51,6 @@ const connection = mysql.createConnection({
         res.status(200).json({ result })
     })
 }
+    exports.findAllComments = (req,res, next) => {
+        console.log(req.params.id);
+    }

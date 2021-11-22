@@ -5,9 +5,10 @@ const postCtrl = require('../controllers/post.controller');
 const multer = require('../middleware/multer')
 
 router.post('', multer, postCtrl.create);
-router.post('/comments', postCtrl.createComments)
+router.post('/comments', postCtrl.createComments);
 router.get('', postCtrl.findAll);
 router.get('/:id', postCtrl.findById);
+router.get('/:id/comments', postCtrl.findAllComments)
 
 
 

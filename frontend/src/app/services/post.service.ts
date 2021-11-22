@@ -14,14 +14,14 @@ export class PostService implements OnInit {
 
   constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {}
 
+  ngOnInit() {}
+
   public findAll(): Observable<Post[]> {
     console.log(this.activatedRoute.snapshot.url);
 
     return this.httpClient.get<any[]>('http://localhost:3000/api/view')
     .pipe(map((result: any) => result.result || []))
   }
-
-  ngOnInit() {}
 
   public findOne(): Observable<Post[]> {
     return this.httpClient.get<any[]>('http://localhost:3000/api' + this.router.url)
@@ -35,6 +35,14 @@ export class PostService implements OnInit {
       (error) => { console.log(error);}
     )
   }
+
+  findAllComments() {
+    console.log('http://localhost:3000/api' + this.router.url + '/comments');
+
+    return this.httpClient
+      .get('http://localhost:3000/api' + this.router.url + '/comments')
+      .pipe(map((result:any) => result.result || []))
+    }
 
   create(post: FormData) {
     console.log(post);
