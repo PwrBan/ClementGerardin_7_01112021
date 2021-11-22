@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ViewMessageComponent } from './components/view-message/view-message.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ViewSingleComponent } from './components/view-single/view-single.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -27,6 +28,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     PostMessageComponent,
     AuthComponent,
     SignUpComponent,
+    ViewSingleComponent,
   ],
   imports: [
     HttpClientModule,

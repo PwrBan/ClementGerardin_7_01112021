@@ -1,10 +1,9 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators'
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post.model';
-import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-view-message',
@@ -16,6 +15,7 @@ export class ViewMessageComponent implements OnInit{
   public readonly posts$: Observable<Post[]>;
   public userId: number;
   public session: any;
+  @Input() postId: number;
 
   constructor(private postService : PostService) {
     this.posts$ = this.postService.findAll();

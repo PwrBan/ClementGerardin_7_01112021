@@ -1,7 +1,8 @@
 export class Post {
+  public id: string;
   public nom: string;
   public prenom: string;
-  public userId: number;
+  public userId: string;
   public message: string;
   public posted_at: Date;
   public image: FormData;

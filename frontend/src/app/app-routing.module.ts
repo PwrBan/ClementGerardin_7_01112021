@@ -5,9 +5,11 @@ import { ViewMessageComponent } from './components/view-message/view-message.com
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ViewSingleComponent } from './components/view-single/view-single.component';
 
 const routes: Routes = [
   {path: 'view', component: ViewMessageComponent },
+  {path: 'view/:id', component: ViewSingleComponent},
   {path: 'post', component: PostMessageComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'signUp', component: SignUpComponent},

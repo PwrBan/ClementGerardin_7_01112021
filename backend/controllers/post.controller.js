@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
     database:  "groupomania"
   })
 
-exports.createPost = (req, res, next ) => {
+    exports.create = (req, res, next ) => {
     var filePath;
     if (!req.file) {
         filePath = null;
@@ -25,8 +25,28 @@ exports.createPost = (req, res, next ) => {
         res.status(201).json({ message : "Message posté"})
         }
     );
+    }
+
+    exports.createComments = (req, res, next) => {
+        const sql = "INSERT INTO comments VALUES (0,?,?,?)";
+        const inserts = [req.body.userId, req.body.message, new Date];
+        const format = mysql.format(sql, inserts);
+        connection.query(format, (err, result, field) => {
+            if(err) res.status(400).json({ message : err });
+            res.status(201).json({ message : "Commentaires posté"})
+        })
+    }
+    exports.findById = (req, res, next) => {
+    const inserts = req.params.id
+    const sql = "SELECT * FROM post WHERE id = ? LIMIT 1"
+    const format = mysql.format(sql, inserts);
+    console.log(format);
+    connection.query(format, (err, result, fields) => {
+        if(err) res.status(400).json({ err });
+        res.status(200).json({ result })
+    })
 }
-exports.findAllPosts = (req, res, next) => {
+    exports.findAll = (req, res, next) => {
     connection.query('SELECT * FROM post', (err, result, field) => {
         if(err) res.status(400).json({ err });
         res.status(200).json({ result })

@@ -1,0 +1,23 @@
+<nb-card *ngFor="let post of post$ | async">
+  <nb-card-header [postId]="post.nom">
+    <nb-user size="medium"
+          name="{{post.nom + ' ' + post.prenom}}"
+          color="#cccccc">
+  </nb-user>
+  <span class="post__date">Publié le : {{post.posted_at | date}}</span>
+  </nb-card-header>
+  <nb-card-body>
+    {{post.message}}
+    <img *ngIf="post.image" src="{{post.image}}" alt="">
+  </nb-card-body>
+  <nb-card-footer>
+    <nb-icon icon="heart-outline"></nb-icon>
+    <button nbButton shape="round" size="small" status="danger" *ngIf="" >Supprimer</button>
+  </nb-card-footer>
+</nb-card>
+<div class="comments">
+  <form (ngSubmit)="onComment(f)" #f="ngForm">
+    <input ngModel name="comment" type="text" nbInput fullWidth shape="round" placeholder="Commentaires">
+    <button nbButton shape="round" size="small" status="primary" >Envoyer</button>
+  </form>
+</div>
