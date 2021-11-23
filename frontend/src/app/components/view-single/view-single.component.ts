@@ -4,6 +4,7 @@ import { Post} from '../../model/post.model';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Comment } from '../../model/comment.model';
 
 @Component({
   selector: 'app-view-single',
@@ -13,12 +14,10 @@ import { Router } from '@angular/router';
 export class ViewSingleComponent{
 
   public readonly post$: Observable<Post[]>;
-  public readonly comments$: Observable<Post[]>;
+  public readonly comments$: Observable<Comment[]>;
   public postId: any;
 
   constructor(private postService: PostService, private router: Router) {
-    console.log(this.postId);
-
     this.post$ = this.postService.findOne();
     this.comments$ = this.postService.findAllComments();
    }
@@ -28,13 +27,14 @@ export class ViewSingleComponent{
    }
    onComment(f: NgForm) {
     const session = JSON.parse(sessionStorage.getItem('user') || '{}');
-      const comment = new Post ({
+      const comment = new Comment ({
         userId: session.userId,
-        message: f.value.comment,
-        posted_at: new Date,
+        comment: f.value.comment,
+        date: new Date,
         postId: this.postId
       })
-      this.postService.comments(comment)
+      console.log(f.value.comment);
+      this.postService.createComments(comment)
       f.reset()
    }
 }

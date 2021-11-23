@@ -29,7 +29,7 @@ const connection = mysql.createConnection({
 
     exports.createComments = (req, res, next) => {
         const sql = "INSERT INTO comments VALUES (0,?,?,?,?)";
-        const inserts = [req.body.userId, req.body.message, new Date, req.body.postId];
+        const inserts = [req.body.userId, req.body.comment, new Date, req.body.postId];
         const format = mysql.format(sql, inserts);
         connection.query(format, (err, result, field) => {
             if(err) res.status(400).json({ message : err });
@@ -52,5 +52,9 @@ const connection = mysql.createConnection({
     })
 }
     exports.findAllComments = (req,res, next) => {
-        console.log(req.params.id);
+        connection.query('SELECT userId, comment, date, user.nom, user.prenom  FROM comments INNER JOIN post ON comments.postId = post.id INNER JOIN user ON comments.userId = user.id WHERE post.id = 47', (err, result, field) => {
+            if(err) res.status(400).json({ err });
+            res.status(200).json({ result })
+        })
+
     }

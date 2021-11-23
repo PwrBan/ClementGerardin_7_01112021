@@ -4,17 +4,14 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { map } from "rxjs/operators";
 import {  Router , ActivatedRoute, NavigationEnd } from "@angular/router";
-import { filter } from "rxjs/operators";
-import { UrlSegment } from "@angular/router";
+import { Comment } from "../model/comment.model";
 
 @Injectable()
-export class PostService implements OnInit {
+export class PostService {
   public id: any;
 
 
   constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {}
-
-  ngOnInit() {}
 
   public findAll(): Observable<Post[]> {
     console.log(this.activatedRoute.snapshot.url);
@@ -28,7 +25,7 @@ export class PostService implements OnInit {
     .pipe(map((result:any) => result.result ||[]))
   }
 
-  comments(comments: Post) {
+  createComments(comments: Comment) {
     this.httpClient
       .post('http://localhost:3000/api/view/comments', comments)
       .subscribe(() => {console.log('Enregistrement fini')},
@@ -37,8 +34,6 @@ export class PostService implements OnInit {
   }
 
   findAllComments() {
-    console.log('http://localhost:3000/api' + this.router.url + '/comments');
-
     return this.httpClient
       .get('http://localhost:3000/api' + this.router.url + '/comments')
       .pipe(map((result:any) => result.result || []))
