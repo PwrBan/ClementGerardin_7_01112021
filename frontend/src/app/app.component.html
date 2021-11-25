@@ -11,20 +11,21 @@
           </button>
           <button nbButton
             class="btn btn__login"
-            [ngClass]="{'btn__disabled': isAuth, 'btn__login': true}">
+            *ngIf="isAuth === false">
             <a routerLink="/auth">Se connecter</a>
           </button>
           <button nbButton
             class="btn btn__signUp"
             status="primary"
-            [ngClass]="{'btn__disabled': isAuth}">
+            *ngIf="isAuth === false"
+            >
             <a routerLink="/signUp">S'inscrire</a>
           </button>
           <button nbButton
           status="danger"
             class="btn btn__signUp"
-            (click)="disconnect()"
-            [ngClass]="{'btn__disabled': !isAuth}">
+            *ngIf="isAuth === true"
+            (click) = "onDisconnect()">
             <a routerLink="view">Deconnexion</a>
         </button>
       </div>

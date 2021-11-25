@@ -10,7 +10,7 @@ import { Post } from 'src/app/model/post.model';
   templateUrl: './view-message.component.html',
   styleUrls: ['./view-message.component.scss']
 })
-export class ViewMessageComponent implements OnInit{
+export class ViewMessageComponent{
 
   public readonly posts$: Observable<Post[]>;
   public userId: number;
@@ -19,22 +19,11 @@ export class ViewMessageComponent implements OnInit{
 
   constructor(private postService : PostService) {
     this.posts$ = this.postService.findAll();
-    console.log(sessionStorage.user);
   }
 
-  ngOnInit(){
-    this.getUserId();
-  }
+  onLike(postId: string){}
+}
 
-  getUserId() {
-    if(sessionStorage.user){
-      this.userId = this.session.userId;
-      }
-    }
 
-  onLike(postId: string){
-    this.postService.like(postId, this.userId);
-  }
-  }
 
 

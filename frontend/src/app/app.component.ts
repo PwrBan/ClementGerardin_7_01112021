@@ -12,14 +12,11 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
 
   public isAuth: Boolean;
-  disconnect() {
-    sessionStorage.removeItem('user');
+
+  constructor(private authService: AuthService){
+    this.isAuth = this.authService.isConnected();
   }
-  public isConnected() {
-    if(sessionStorage.user) {
-      return this.isAuth = true;
-    } else {
-      return this.isAuth = false;
-    }
+  onDisconnect(){
+    this.isAuth = this.authService.disconnect();
   }
   }

@@ -21,6 +21,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ViewSingleComponent } from './components/view-single/view-single.component';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -55,7 +56,7 @@ import { AuthService } from './auth/auth.service';
       useClass: TokenInterceptor,
       multi: true
     },
-    PostService, UserService, AuthService],
+    PostService, UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
