@@ -24,13 +24,16 @@
 <nb-layout-column class >
   <nb-card *ngFor="let comment of comments$ | async">
     <nb-card-header>
-      <nb-user size="medium"
-          name="{{comment.nom + ' ' + comment.prenom}}"
-          color="#cccccc">
-  </nb-user>
-      <span class="post__date">Publié le : {{comment.date | date}}</span>
+      <div class="card-comment__header">
+        <nb-user size="medium"
+            name="{{comment.nom + ' ' + comment.prenom}}"
+            color="#cccccc">
+        </nb-user>
+        <span class="card-comment__date">Publié le : {{comment.date | date: 'short'}}</span>
+      </div>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body class="card-comment">
+
       {{comment.comment}}
     </nb-card-body>
     </nb-card>

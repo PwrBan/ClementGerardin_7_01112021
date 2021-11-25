@@ -37,7 +37,8 @@ exports.login = (req, res, next) => {
                     email: result[0].email,
                     userId: result[0].id,
                     token: jwt.sign(
-                        { userId: result[0].id},
+                        { userId: result[0].id,
+                         isAdmin: false },
                         'SECRET_KEY',
                         {expiresIn: '24'}
                     )

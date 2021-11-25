@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostService } from './services/post.service';
+import { AuthService } from './auth/auth.service';
 
 
 @Component({
@@ -9,21 +10,16 @@ import { PostService } from './services/post.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public isAuth: boolean;
+
+  public isAuth: Boolean;
   disconnect() {
     sessionStorage.removeItem('user');
-    this.isConnected();
   }
   public isConnected() {
-    if(sessionStorage.getItem('user')) {
-      console.log('toto');
-      this.isAuth = true;
+    if(sessionStorage.user) {
+      return this.isAuth = true;
     } else {
-      this.isAuth = false;
+      return this.isAuth = false;
     }
   }
-  ngOnInit(): void {
-    this.isConnected();
-  }
-
   }

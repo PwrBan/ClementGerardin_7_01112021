@@ -52,9 +52,33 @@ const connection = mysql.createConnection({
     })
 }
     exports.findAllComments = (req,res, next) => {
-        connection.query('SELECT userId, comment, date, user.nom, user.prenom  FROM comments INNER JOIN post ON comments.postId = post.id INNER JOIN user ON comments.userId = user.id WHERE post.id = 47', (err, result, field) => {
+        const sql = 'SELECT userId, comment, date, user.nom, user.prenom  FROM comments INNER JOIN post ON comments.postId = post.id INNER JOIN user ON comments.userId = user.id WHERE post.id = ?';
+        const insert = req.params.id;
+        const format = mysql.format(sql, insert);
+        connection.query(format, (err, result, field) => {
             if(err) res.status(400).json({ err });
             res.status(200).json({ result })
         })
 
+    }
+
+    exports.like = (req, res, next) => {
+        const selectSql =  'SELECT userId FROM liked WHERE postId = ?';
+        const format = mysql.format(selectSql, req.params.id);
+        connection.query(format, (err, result, field) => {
+            console.log(JSON.stringify(result));
+            console.log(req.body[0].userId);
+            if(result !== req.body[0].userId) { 
+                const insertSql = 'INSERT INTO liked VALUES (0, ?, ?)';
+                const inserts = [req.body[0].userId, req.body[0].postId];
+                const insertFormat = mysql.format(insertSql, inserts);
+                connection.query(insertFormat, (err, result, field) => {
+                    if(err) res.status(400).json({ err })
+                    res.status(200).json({ message: 'post like'})
+            })
+
+            } else {
+            
+            }
+        })
     }

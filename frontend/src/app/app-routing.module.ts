@@ -3,7 +3,7 @@ import { PostMessageComponent } from './components/post-message/post-message.com
 import { AppComponent } from './app.component';
 import { ViewMessageComponent } from './components/view-message/view-message.component';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './components/auth/auth.component';
+import { AuthComponent } from './components/login/auth.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ViewSingleComponent } from './components/view-single/view-single.component';
 
@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'post', component: PostMessageComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'signUp', component: SignUpComponent},
-  {path: '', component: ViewMessageComponent }
+  {path: '', redirectTo: 'view', pathMatch : 'full' }
 ];
 
 @NgModule({

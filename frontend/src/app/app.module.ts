@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule} from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { PostService } from './services/post.service';
@@ -16,9 +16,11 @@ import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutM
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { ViewMessageComponent } from './components/view-message/view-message.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { AuthComponent } from './components/login/auth.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ViewSingleComponent } from './components/view-single/view-single.component';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -47,7 +49,13 @@ import { ViewSingleComponent } from './components/view-single/view-single.compon
     NbInputModule,
     NbFormFieldModule,
   ],
-  providers: [PostService, UserService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    PostService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

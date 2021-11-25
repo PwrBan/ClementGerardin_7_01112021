@@ -7,18 +7,18 @@
           <button nbButton
             class="btn btn__post"
             status="primary">
-            <a routerLink="post">Post</a>
+            <a routerLink="/post">Post</a>
           </button>
           <button nbButton
             class="btn btn__login"
             [ngClass]="{'btn__disabled': isAuth, 'btn__login': true}">
-            <a routerLink="auth">Se connecter</a>
+            <a routerLink="/auth">Se connecter</a>
           </button>
           <button nbButton
             class="btn btn__signUp"
             status="primary"
             [ngClass]="{'btn__disabled': isAuth}">
-            <a routerLink="signUp">S'inscrire</a>
+            <a routerLink="/signUp">S'inscrire</a>
           </button>
           <button nbButton
           status="danger"

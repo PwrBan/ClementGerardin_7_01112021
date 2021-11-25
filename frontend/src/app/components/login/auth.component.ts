@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,7 +11,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  constructor(private router: Router, private userService: UserService, private appComponent: AppComponent) { }
+  constructor(private router: Router, private userService: UserService, private appComponent: AppComponent, private authService: AuthService) { }
 
   ngOnInit(): void {
   }

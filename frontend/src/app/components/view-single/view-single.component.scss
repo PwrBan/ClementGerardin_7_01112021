@@ -7,3 +7,18 @@ nb-card-body
 {
   display: flex;
 }
+.card-comment
+{
+  display: flex;
+  flex-direction: row;
+  &__header
+  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__date
+  {
+    font-size: x-small;
+  }
+}

@@ -13,9 +13,9 @@
         <img *ngIf="post.image" src="{{post.image}}" alt="">
       </nb-card-body>
       <nb-card-footer>
-        <nb-icon icon="heart-outline"></nb-icon>
+        <a (click)="onLike(post.id)" ><nb-icon icon="heart-outline"></nb-icon></a>
         <button nbButton shape="round" size="small" status="danger" *ngIf="" >Supprimer</button>
-        <a routerLink="view/{{post.id}}">Commentaires</a>
+        <a routerLink="/view/{{post.id}}">Commentaires</a>
       </nb-card-footer>
   </nb-card>
 </nb-layout-column>

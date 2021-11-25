@@ -14,8 +14,6 @@ export class PostService {
   constructor(private httpClient: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   public findAll(): Observable<Post[]> {
-    console.log(this.activatedRoute.snapshot.url);
-
     return this.httpClient.get<any[]>('http://localhost:3000/api/view')
     .pipe(map((result: any) => result.result || []))
   }
@@ -47,6 +45,23 @@ export class PostService {
       (error) => { console.log(error);}
     )
   }
+
+  like(postId: string, userId: number) {
+
+    const userLiked = [
+      {
+        postId: postId,
+        userId: userId
+      }
+    ]
+    this.httpClient
+    .post('http://localhost:3000/api/view/' + postId + '/like', userLiked)
+    .subscribe(() => { console.log('Post liké');
+    },
+    (err) => { console.log(err);
+    })
+  }
+
 }
 
 

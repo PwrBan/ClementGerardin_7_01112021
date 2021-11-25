@@ -14,11 +14,12 @@ export class ViewMessageComponent implements OnInit{
 
   public readonly posts$: Observable<Post[]>;
   public userId: number;
-  public session: any;
+  public session: any = JSON.parse(sessionStorage.user)
   @Input() postId: number;
 
   constructor(private postService : PostService) {
     this.posts$ = this.postService.findAll();
+    console.log(sessionStorage.user);
   }
 
   ngOnInit(){
@@ -27,10 +28,13 @@ export class ViewMessageComponent implements OnInit{
 
   getUserId() {
     if(sessionStorage.user){
-      this.session = JSON.parse(sessionStorage.user);
       this.userId = this.session.userId;
       }
     }
+
+  onLike(postId: string){
+    this.postService.like(postId, this.userId);
+  }
   }
 
 
