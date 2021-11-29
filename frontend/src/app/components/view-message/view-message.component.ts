@@ -29,12 +29,15 @@ export class ViewMessageComponent{
 }
   delete(id: string){
     this.postService.delete(id)
-    .subscribe(() => {console.log('Enregistrement fini')},
+    .subscribe(() => {console.log('Post supprimé')},
       (error) => { console.log(error);})
-    location.reload();
   }
 
-  onLike(postId: string){}
+  onLike(postId: string){
+    this.postService.like(postId, this.userId);
+    console.log(postId);
+
+  }
 }
 
 

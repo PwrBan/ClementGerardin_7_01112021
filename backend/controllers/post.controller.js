@@ -10,7 +10,6 @@ const connection = mysql.createConnection({
   })
 
     exports.create = (req, res, next ) => {
-        console.log(req.body);
     var filePath;
     if (!req.file) {
         filePath = null;
@@ -18,10 +17,9 @@ const connection = mysql.createConnection({
         filePath = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     }
     const post = JSON.parse(req.body.post);
-    const sql = "INSERT INTO post VALUES (0,?,?,?,?,?,?)";
-    const inserts = [post.user_id, post.message, new Date, post.prenom, post.nom, filePath];
+    const sql = "INSERT INTO post VALUES (0,?,?,?,?,?,?,?)";
+    const inserts = [post.user_id, post.message, new Date, post.prenom, post.nom, filePath, 0];
     const format = mysql.format(sql, inserts);
-    console.log(format);
     connection.query(format, (err, result, fields) => {
         if(err) res.status(400).json({ message : err });
         res.status(201).json({ message : "Message posté"})
@@ -58,6 +56,7 @@ const connection = mysql.createConnection({
 }
     exports.findAll = (req, res, next) => {
     connection.query('SELECT * FROM post', (err, result, field) => {
+        console.log(result);
         if(err) res.status(400).json({ err });
         res.status(200).json({ result })
     })
@@ -74,22 +73,32 @@ const connection = mysql.createConnection({
     }
 
     exports.like = (req, res, next) => {
-        const selectSql =  'SELECT userId FROM liked WHERE postId = ?';
-        const format = mysql.format(selectSql, req.params.id);
+        const selectSql =  'SELECT userId FROM liked WHERE postId = ? AND userId = ?';
+        const selectInsert = [req.params.id, req.body[0].userId ]
+        const format = mysql.format(selectSql, selectInsert);
+        const insert = req.params.id;
         connection.query(format, (err, result, field) => {
-            console.log(JSON.stringify(result));
-            console.log(req.body[0].userId);
-            if(result !== req.body[0].userId) { 
+            if(!result[0]) { 
                 const insertSql = 'INSERT INTO liked VALUES (0, ?, ?)';
                 const inserts = [req.body[0].userId, req.body[0].postId];
                 const insertFormat = mysql.format(insertSql, inserts);
+                
+                connection.query(mysql.format('UPDATE post SET liked = liked + 1 WHERE id = ?', req.params.id))
+                
                 connection.query(insertFormat, (err, result, field) => {
                     if(err) res.status(400).json({ err })
                     res.status(200).json({ message: 'post like'})
-            })
-
+                })
             } else {
-            
+                const inserts = [req.body[0].userId, req.body[0].postId];
+                const deleteSql = 'DELETE FROM liked WHERE userId = ? AND postId = ?';
+
+                const deleteFormat = mysql.format(deleteSql, inserts);
+                connection.query(mysql.format('UPDATE post SET liked = liked - 1 WHERE id = ?', req.params.id))
+                connection.query(deleteFormat, (err, restult, field) => {
+                    if(err) res.status(400).json({ err })
+                    res.status(200).json({ message: 'post unlike'})
+                })
             }
         })
     }

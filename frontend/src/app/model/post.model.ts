@@ -6,6 +6,7 @@ export class Post {
   public message: string;
   public posted_at: Date;
   public image: FormData;
+  public liked: number;
 
   public constructor(data: Partial<Post> = {}) {
     Object.assign(this , data);

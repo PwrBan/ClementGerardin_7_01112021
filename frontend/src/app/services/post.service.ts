@@ -49,6 +49,8 @@ export class PostService {
   }
 
   delete(id:string): Observable<any>{
+    console.log('http://localhost:3000/api/view/' + id);
+
     return this.httpClient
     .delete('http://localhost:3000/api/view/' + id)
   }
