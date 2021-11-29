@@ -5,6 +5,7 @@ import { Injectable, OnInit } from "@angular/core";
 import { map } from "rxjs/operators";
 import {  Router , ActivatedRoute, NavigationEnd } from "@angular/router";
 import { Comment } from "../model/comment.model";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Injectable()
 export class PostService {
@@ -39,11 +40,17 @@ export class PostService {
 
   create(post: FormData) {
     console.log(post);
+
     this.httpClient
       .post('http://localhost:3000/api/view', post)
       .subscribe(() => {console.log('Enregistrement fini')},
       (error) => { console.log(error);}
     )
+  }
+
+  delete(id:string): Observable<any>{
+    return this.httpClient
+    .delete('http://localhost:3000/api/view/' + id)
   }
 
   like(postId: string, userId: number) {
@@ -61,7 +68,6 @@ export class PostService {
     (err) => { console.log(err);
     })
   }
-
 }
 
 

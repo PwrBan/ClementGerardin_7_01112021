@@ -30,7 +30,7 @@ export class PostMessageComponent {
       ({
           nom: session.nom,
           prenom: session.prenom,
-          userId: session.userId,
+          user_id: session.userId,
           message: form.value.message,
           posted_at: new Date
         })

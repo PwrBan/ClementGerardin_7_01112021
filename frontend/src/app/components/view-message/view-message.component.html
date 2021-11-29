@@ -13,9 +13,11 @@
         <img *ngIf="post.image" src="{{post.image}}" alt="">
       </nb-card-body>
       <nb-card-footer>
-        <a (click)="onLike(post.id)" ><nb-icon icon="heart-outline"></nb-icon></a>
-        <button nbButton shape="round" size="small" status="danger" *ngIf="" >Supprimer</button>
-        <a routerLink="/view/{{post.id}}">Commentaires</a>
+        <div>
+          <a (click)="onLike(post.id)" class="like"><nb-icon icon="heart-outline"></nb-icon></a>
+          <a routerLink="/view/{{post.id}}">Commentaires</a>
+        </div>
+        <button nbButton shape="round" size="small" status="danger" *ngIf="userId === post.user_id || isAdmin === 1" (click)="delete(post.id)" >Supprimer</button>
       </nb-card-footer>
   </nb-card>
 </nb-layout-column>

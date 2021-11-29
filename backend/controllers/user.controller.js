@@ -13,8 +13,8 @@ exports.signup = (req, res, next) => {
     console.log();
     bcrypt.hash(req.body.password, 10)
     .then((hash) => {
-        const sql = "INSERT INTO user VALUES (0,?,?,?,?)";
-        const inserts = [req.body.prenom, req.body.nom, req.body.email ,hash ];
+        const sql = "INSERT INTO user VALUES (0,?,?,?,?,?)";
+        const inserts = [req.body.prenom, req.body.nom, req.body.email ,hash, true];
         const format = mysql.format(sql, inserts);
         connection.query(format);
     })
@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
     .catch((err) => res.status(400).json({ message : err }))
 }
 exports.login = (req, res, next) => {
-    const sql = "SELECT nom, id, prenom, email, password FROM user WHERE email = ? LIMIT 1";
+    const sql = "SELECT nom, id, prenom, email, password, isAdmin FROM user WHERE email = ? LIMIT 1";
     const inserts = [req.body.email];
     const format = mysql.format(sql, inserts);
     connection.query(format, (err, result, fields) => {
@@ -31,6 +31,7 @@ exports.login = (req, res, next) => {
                 if(!valid) {
                 return  res.status(400).json({message: "Email ou mot de passe incorrect"}); 
             }
+            console.log(result[0].isAdmin);
                 const user = {
                     prenom: result[0].prenom,
                     nom: result[0].nom,
@@ -38,7 +39,7 @@ exports.login = (req, res, next) => {
                     userId: result[0].id,
                     token: jwt.sign(
                         { userId: result[0].id,
-                         isAdmin: false },
+                        admin: result[0].isAdmin},
                         'SECRET_KEY',
                         {expiresIn: '24'}
                     )

@@ -1,6 +1,11 @@
 @import 'sass/_variables';
 @import '../themes.scss';
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;500&display=swap');
 
+*
+{
+  font-family: 'Outfit', sans-serif;
+}
 h1
 {
   justify-self: flex-start;

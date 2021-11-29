@@ -28,7 +28,8 @@ export class AuthComponent implements OnInit {
           'token' : result[0].token
         }
         sessionStorage.setItem('user', JSON.stringify(user))
-        this.authService.isConnected()
+        this.authService.isConnected();
+        this.appComponent.isAuth = true;
       },
       (err) => { console.log(err); }
     )

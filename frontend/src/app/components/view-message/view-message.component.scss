@@ -1,3 +1,5 @@
+@import '../../sass/font';
+
 a
   {
     text-decoration: none;
@@ -12,6 +14,7 @@ nb-card-header
   display: flex;
   align-items: center;
   padding: .5rem 1rem;
+  justify-content: space-between;
   .post__date
   {
     font-size: x-small;
@@ -20,4 +23,27 @@ nb-card-header
 }
 :host nb-icon{
   font-size: 1.5em;
+}
+nb-card-body
+{
+  display: flex;
+  flex-direction: column;
+  img
+  {
+    padding-top: 5%;
+  }
+}
+nb-card-footer
+{
+  display: flex;
+  justify-content: space-between;
+  div
+  {
+    display: flex;
+    align-items: center;
+  }
+  .like
+  {
+    margin-right: 15%;
+  }
 }

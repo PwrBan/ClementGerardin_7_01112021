@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
   })
 
     exports.create = (req, res, next ) => {
+        console.log(req.body);
     var filePath;
     if (!req.file) {
         filePath = null;
@@ -18,13 +19,23 @@ const connection = mysql.createConnection({
     }
     const post = JSON.parse(req.body.post);
     const sql = "INSERT INTO post VALUES (0,?,?,?,?,?,?)";
-    const inserts = [post.userId, post.message, new Date, post.prenom, post.nom, filePath];
+    const inserts = [post.user_id, post.message, new Date, post.prenom, post.nom, filePath];
     const format = mysql.format(sql, inserts);
+    console.log(format);
     connection.query(format, (err, result, fields) => {
         if(err) res.status(400).json({ message : err });
         res.status(201).json({ message : "Message posté"})
         }
     );
+    }
+    
+    exports.delete = (req, res, next) => {
+        const sql = 'DELETE FROM post WHERE id = ?';
+        const format = mysql.format(sql, req.params.id);
+        connection.query(format, (err, result, field) => {
+            if(err) res.status(400).json({ message : err});
+            res.status(200).json({ message : "post supprimé"});
+        })
     }
 
     exports.createComments = (req, res, next) => {

@@ -2,7 +2,7 @@ export class Post {
   public id: string;
   public nom: string;
   public prenom: string;
-  public userId: string;
+  public user_id: number;
   public message: string;
   public posted_at: Date;
   public image: FormData;

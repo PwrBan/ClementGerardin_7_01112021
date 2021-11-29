@@ -15,12 +15,10 @@
     <button nbButton shape="round" size="small" status="danger" *ngIf="" >Supprimer</button>
   </nb-card-footer>
 </nb-card>
-<div class="comments" *ngFor="let post of post$ | async">
-  <form (ngSubmit)="onComment(f)" #f="ngForm">
-    <input ngModel name="comment" type="text" nbInput fullWidth shape="round" placeholder="Commentaires">
+  <form (ngSubmit)="onComment(f)" #f="ngForm" *ngFor="let post of post$ | async" class="form-comment">
+    <input ngModel name="comment" status="primary" type="text" nbInput shape="round" placeholder="Commentaires" fullWidth>
     <button nbButton shape="round" size="small" status="primary" (click)="getPostId(post.id)" >Envoyer</button>
   </form>
-</div>
 <nb-layout-column class >
   <nb-card *ngFor="let comment of comments$ | async">
     <nb-card-header>

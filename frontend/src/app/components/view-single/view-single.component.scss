@@ -1,11 +1,24 @@
+@import '../../sass/font';
+
+nb-card-header
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 nb-card-body
 {
   display: flex;
   flex-direction: column;
 }
-.comments
+form
 {
   display: flex;
+  flex-direction: row;
+  input
+  {
+    width: 100%;
+  }
 }
 .card-comment
 {

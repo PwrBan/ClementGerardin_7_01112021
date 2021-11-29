@@ -2,12 +2,13 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => { 
     try {
-        const session = sessionStorage.getItem('user');
-        const token = session.token;
+        const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'SECRET_KEY');
         const userId = decodedToken.userId;
+        const isAdmin = decodedToken.isAdmin;
         if (req.body.userId && req.body.userId !== userId) {
-            throw 'Invalid user ID'
+            if(isAdmin === 0)
+                throw 'Invalid user ID'
         } else {
             next();
         }
