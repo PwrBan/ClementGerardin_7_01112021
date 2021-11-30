@@ -56,7 +56,6 @@ const connection = mysql.createConnection({
 }
     exports.findAll = (req, res, next) => {
     connection.query('SELECT * FROM post', (err, result, field) => {
-        console.log(result);
         if(err) res.status(400).json({ err });
         res.status(200).json({ result })
     })

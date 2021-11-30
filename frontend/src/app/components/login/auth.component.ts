@@ -17,8 +17,17 @@ export class AuthComponent  {
 
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
-  open(){
-    this.popover.show();
+  public showPassword = true;
+
+  public getInputType() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
   onLogin(form: NgForm) {
     this.userService.login(form.value.email, form.value.password)

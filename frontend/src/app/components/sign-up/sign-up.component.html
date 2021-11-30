@@ -1,7 +1,25 @@
+<h1>S'inscrire</h1>
 <form (ngSubmit)="onSignUp(f)" #f="ngForm">
   <input name="nom" ngModel type="text" nbInput fullWidth shape="round" placeholder="Nom">
   <input name="prenom" ngModel type="text" nbInput fullWidth shape="round" placeholder="Prenom">
-  <input name="password" ngModel type="text" nbInput fullWidth shape="round" placeholder="Mot de passe">
-  <input name="email" ngModel type="text" nbInput fullWidth shape="round" placeholder="Adresse mail">
+  <nb-form-field>
+      <input [type]="getInputType()" nbInput fullWidth shape="round"
+      name="password"
+      placeholder="Mot de passe"
+      nbPopover="Mot de passe trop faible (Veuillez utilisez 8 caractéres min, 1 chiffre, 1 majuscules et 1 minuscule)"
+      nbPopoverTrigger="noop"
+      nbPopoverPlacement="end">
+            <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
+              <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                        pack="eva"
+                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+              </nb-icon>
+            </button>
+  </nb-form-field>
+  <nb-form-field>
+    <input name="email" ngModel type="text" nbInput fullWidth shape="round" placeholder="Adresse mail">
+    <nb-icon nbSuffix icon="at-outline" pack="eva"></nb-icon>
+  </nb-form-field>
+
   <button nbButton status="danger">S'inscrire</button>
 </form>
