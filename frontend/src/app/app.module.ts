@@ -11,7 +11,7 @@ import { PostMessageComponent } from './components/post-message/post-message.com
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule} from '@nebular/theme';
+import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule, NbPopoverModule} from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +49,7 @@ import { AuthGuard } from './auth/auth.guard';
     RouterModule,
     NbInputModule,
     NbFormFieldModule,
+    NbPopoverModule
   ],
   providers: [
     {

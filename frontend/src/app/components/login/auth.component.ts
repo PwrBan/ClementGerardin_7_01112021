@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NbPopoverDirective } from '@nebular/theme';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent  {
+
   constructor(private router: Router, private userService: UserService, private appComponent: AppComponent, private authService: AuthService) { }
 
-  ngOnInit(): void {
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+
+  open(){
+    this.popover.show();
   }
   onLogin(form: NgForm) {
     this.userService.login(form.value.email, form.value.password)
@@ -30,10 +35,13 @@ export class AuthComponent implements OnInit {
         sessionStorage.setItem('user', JSON.stringify(user))
         this.authService.isConnected();
         this.appComponent.isAuth = true;
+        this.router.navigate(['view']);
       },
-      (err) => { console.log(err); }
+      (err) => {
+        this.popover.show()
+      }
     )
-    this.router.navigate(['view']);
+
   }
 }
 
