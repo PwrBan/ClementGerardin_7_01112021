@@ -11,14 +11,17 @@
     <img *ngIf="post.image" src="{{post.image}}" alt="">
   </nb-card-body>
   <nb-card-footer>
-    <nb-icon icon="heart-outline"></nb-icon>
-    <button nbButton shape="round" size="small" status="danger" *ngIf="" >Supprimer</button>
+    <nb-actions size="medium">
+      <nb-action (click)="onLike(post.id)"class="like" icon="heart-outline" badgePosition="bottom left" badgeStatus="danger" badgeText="{{post.liked}}"></nb-action>
+    </nb-actions>
   </nb-card-footer>
 </nb-card>
+
   <form (ngSubmit)="onComment(f)" #f="ngForm" *ngFor="let post of post$ | async" class="form-comment">
     <input ngModel name="comment" status="primary" type="text" nbInput shape="round" placeholder="Commentaires" fullWidth>
     <button nbButton shape="round" size="small" status="primary" (click)="getPostId(post.id)" >Envoyer</button>
   </form>
+
 <nb-layout-column class >
   <nb-card *ngFor="let comment of comments$ | async">
     <nb-card-header>
@@ -27,7 +30,7 @@
             name="{{comment.nom + ' ' + comment.prenom}}"
             color="#cccccc">
         </nb-user>
-        <span class="card-comment__date">Publié le : {{comment.date | date: 'short'}}</span>
+        <span class="card-comment__date">Publié le : {{comment.date | date }}</span>
       </div>
     </nb-card-header>
     <nb-card-body class="card-comment">

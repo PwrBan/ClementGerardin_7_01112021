@@ -7,17 +7,18 @@
               color="#cccccc">
       </nb-user>
       <span class="post__date">Publié le : {{post.posted_at | date}}</span>
+      <nb-action *ngIf="userId === post.user_id || isAdmin === 1" icon="more-vertical-outline" [nbContextMenu]="items" (click)="getPostId(post.id)" ></nb-action>
       </nb-card-header>
       <nb-card-body>
         {{post.message}}
         <img *ngIf="post.image" src="{{post.image}}" alt="">
       </nb-card-body>
       <nb-card-footer>
-        <div>
-          <a (click)="onLike(post.id)" class="like"><nb-icon icon="heart-outline"></nb-icon></a>
-          <a routerLink="/view/{{post.id}}">Commentaires</a>
-        </div>
-        <button nbButton shape="round" size="small" status="danger" *ngIf="userId === post.user_id || isAdmin === 1" (click)="delete(post.id)" >Supprimer</button>
+        <nb-actions size="medium">
+          <nb-action (click)="onLike(post.id)"class="like" [icon]="(hasUserLike$ | async) ?'heart' : 'heart-outline' " badgePosition="bottom left" badgeStatus="danger" badgeText="{{post.liked}}"></nb-action>
+          <nb-action icon="message-square-outline" routerLink="/view/{{post.id}}"></nb-action>
+        </nb-actions>
+
       </nb-card-footer>
   </nb-card>
 </nb-layout-column>

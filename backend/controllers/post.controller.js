@@ -72,7 +72,7 @@ const connection = mysql.createConnection({
     }
 
     exports.like = (req, res, next) => {
-        const selectSql =  'SELECT userId FROM liked WHERE postId = ? AND userId = ?';
+        const selectSql =  'SELECT userLiked FROM liked WHERE postLiked = ? AND userLiked = ?';
         const selectInsert = [req.params.id, req.body[0].userId ]
         const format = mysql.format(selectSql, selectInsert);
         const insert = req.params.id;
@@ -90,8 +90,7 @@ const connection = mysql.createConnection({
                 })
             } else {
                 const inserts = [req.body[0].userId, req.body[0].postId];
-                const deleteSql = 'DELETE FROM liked WHERE userId = ? AND postId = ?';
-
+                const deleteSql = 'DELETE FROM liked WHERE userLiked = ? AND postLiked = ?';
                 const deleteFormat = mysql.format(deleteSql, inserts);
                 connection.query(mysql.format('UPDATE post SET liked = liked - 1 WHERE id = ?', req.params.id))
                 connection.query(deleteFormat, (err, restult, field) => {
@@ -100,4 +99,10 @@ const connection = mysql.createConnection({
                 })
             }
         })
+    }
+    exports.findAllLikes = (req,res, next) => {
+        connection.query(mysql.format('SELECT postLiked FROM liked WHERE userLiked = ?', req.params.id), (err, result, fields) => {
+            if(err) res.status(400).json({ message : err });
+            res.status(200).json({ result })
+            } )
     }

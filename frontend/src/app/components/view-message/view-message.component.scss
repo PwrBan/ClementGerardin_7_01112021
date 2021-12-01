@@ -1,4 +1,5 @@
 @import '../../sass/font';
+@import '../../sass/_variables';
 
 a
   {
@@ -22,7 +23,22 @@ nb-card-header
   }
 }
 :host nb-icon{
-  font-size: 1.5em;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    font-size: 1.5rem;
+    background-position: bottom;
+    background: linear-gradient(to bottom,transparent 33%, $color-primary, $color-secondary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: all 200ms ease-in;
+    background-size: 100% 200%;
+    &:hover
+    {
+      background-position: bottom;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke-color: transparent;
+    }
 }
 nb-card-body
 {
@@ -37,14 +53,14 @@ nb-card-footer
 {
   display: flex;
   justify-content: space-between;
+  padding: .5em 5%;
   div
   {
     display: flex;
     align-items: center;
-    margin: 0 5%;
   }
-  .like
+  .link-comment
   {
-    margin-right: 15%;
+    margin-left: 15%;
   }
 }

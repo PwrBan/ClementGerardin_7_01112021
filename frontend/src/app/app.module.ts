@@ -11,7 +11,7 @@ import { PostMessageComponent } from './components/post-message/post-message.com
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule, NbPopoverModule} from '@nebular/theme';
+import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule, NbPopoverModule, NbContextMenuModule, NbMenuModule, NbMenuService, NbMenuItem, NbActionComponent, NbActionsModule} from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +49,10 @@ import { AuthGuard } from './auth/auth.guard';
     RouterModule,
     NbInputModule,
     NbFormFieldModule,
-    NbPopoverModule
+    NbPopoverModule,
+    NbContextMenuModule,
+    NbMenuModule.forRoot(),
+    NbActionsModule
   ],
   providers: [
     {
@@ -57,7 +60,7 @@ import { AuthGuard } from './auth/auth.guard';
       useClass: TokenInterceptor,
       multi: true
     },
-    PostService, UserService, AuthService, AuthGuard],
+    PostService,NbMenuItem, UserService, AuthService, AuthGuard, NbMenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

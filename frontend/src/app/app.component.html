@@ -1,8 +1,7 @@
 <nb-layout>
 
   <nb-layout-header>
-
-        <h1>Groupomania</h1>
+        <a routerLink="/view"><img src="../assets/images/icon-left-font-monochrome-black.svg" alt=""></a>
         <div class="btn-group">
           <button nbButton
             class="btn btn__post"
@@ -29,8 +28,11 @@
             (click) = "onDisconnect()">
             <a routerLink="view">Deconnexion</a>
         </button>
+        <button outline nbButton [nbContextMenu]="items" nbContextMenuTag="my-context-menu" class="btn__mid" status="primary">
+          Menu
+        </button>
+        <button nbButton [nbContextMenu]="items" nbContextMenuTag="my-context-menu" class="btn__mobile"><nb-icon icon="menu"></nb-icon></button>
       </div>
-
   </nb-layout-header>
 
     <nb-layout-column>

@@ -11,7 +11,8 @@ router.post('/:id/like', postCtrl.like);
 router.get('', postCtrl.findAll);
 router.get('/:id', postCtrl.findById);
 router.get('/:id/comments', postCtrl.findAllComments);
-router.put('/:id/like', postCtrl.like)
+router.get('/:id/like', postCtrl.findAllLikes);
+router.put('/:id/like', postCtrl.like);
 router.delete('/:id',auth, postCtrl.delete)
 
 

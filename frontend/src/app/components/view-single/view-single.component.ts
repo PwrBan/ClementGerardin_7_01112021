@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comment } from '../../model/comment.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-view-single',
@@ -17,7 +18,7 @@ export class ViewSingleComponent{
   public readonly comments$: Observable<Comment[]>;
   public postId: any;
 
-  constructor(private postService: PostService, private router: Router) {
+  constructor(private postService: PostService, private router: Router, private authService: AuthService) {
     this.post$ = this.postService.findOne();
     this.comments$ = this.postService.findAllComments();
    }
@@ -35,6 +36,11 @@ export class ViewSingleComponent{
       })
       console.log(f.value.comment);
       this.postService.createComments(comment)
-      f.reset()
+      location.reload();
    }
+   onLike(postId: string){
+    this.postService.like(postId, this.authService.storage.userId);
+    location.reload();
+
+  }
 }

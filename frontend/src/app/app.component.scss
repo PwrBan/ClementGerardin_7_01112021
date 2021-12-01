@@ -10,19 +10,37 @@ h1
 {
   justify-self: flex-start;
 }
+a
+{
+  text-decoration: none;
+}
 .btn-group
 {
   display: flex;
 }
 .btn
 {
-  margin: 0 5%;
-  &__disabled
+  &__mid
   {
     display: none;
+    @media (max-width:700px) and (min-width:350px) {
+      display: flex;
+    }
   }
+  &__mobile
+  {
+    display: none;
+    @media (max-width:350px) {
+      display: flex;
+      font-size: 1.5rem!important;
+    }
+  }
+  margin: 0 5%;
     a{
       color: white!important;
       text-decoration: none;
+    }
+    @media (max-width:700px) {
+      display: none;
     }
 }
