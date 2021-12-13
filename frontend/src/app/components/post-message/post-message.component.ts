@@ -25,9 +25,9 @@ export class PostMessageComponent {
     }
   }
   public onSubmit(form: NgForm) {
-    const session = JSON.parse(sessionStorage.getItem('user') || '{}');
+    const session = JSON.parse(localStorage.getItem('user') || '{}');
       const post = new Post
-      ({
+        ({
           nom: session.nom,
           prenom: session.prenom,
           user_id: session.userId,
@@ -37,6 +37,10 @@ export class PostMessageComponent {
         this.formData.append("post", JSON.stringify(post))
 
       this.postService.create(this.formData)
+      .subscribe(() => {
+        console.log('Enregistrement fini')
+      },
+      (error) => { console.log(error) })
       this.router.navigate(['view'])
   }
 }

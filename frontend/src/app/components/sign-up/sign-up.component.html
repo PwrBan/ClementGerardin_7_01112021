@@ -1,25 +1,24 @@
 <h1>S'inscrire</h1>
-<form (ngSubmit)="onSignUp(f)" #f="ngForm">
-  <input name="nom" ngModel type="text" nbInput fullWidth shape="round" placeholder="Nom">
-  <input name="prenom" ngModel type="text" nbInput fullWidth shape="round" placeholder="Prenom">
+<form [formGroup]="signUpProfile" (ngSubmit)="onSignUp()">
+  <input  formControlName="nom" name="nom" type="text" nbInput fullWidth shape="round" placeholder="Nom">
+  <input  formControlName="prenom"  name="prenom" type="text" nbInput fullWidth shape="round" placeholder="Prenom">
   <nb-form-field>
       <input [type]="getInputType()" nbInput fullWidth shape="round"
-      name="password"
-      placeholder="Mot de passe"
-      nbPopover="Mot de passe trop faible (Veuillez utilisez 8 caractéres min, 1 chiffre, 1 majuscules et 1 minuscule)"
-      nbPopoverTrigger="noop"
-      nbPopoverPlacement="end">
+      formControlName="password"
+      placeholder="Mot de passe">
             <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
               <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
                         pack="eva"
-                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                        [attr.aria-label]="showPassword ? 'show password' : 'hide password'">
               </nb-icon>
             </button>
+            <nb-alert accent="danger" *ngIf="password?.invalid && password?.touched">Au minimum 1 Majuscules, 1 minuscule et 8 caractéres</nb-alert>
   </nb-form-field>
   <nb-form-field>
-    <input name="email" ngModel type="text" nbInput fullWidth shape="round" placeholder="Adresse mail">
+    <input name="email" formControlName="email"  type="text" nbInput fullWidth shape="round" placeholder="Adresse mail">
     <nb-icon nbSuffix icon="at-outline" pack="eva"></nb-icon>
+    <nb-alert accent="danger" *ngIf="email?.invalid && email?.touched">Veuillez saisir une adresse mail valide !</nb-alert>
+    <nb-alert accent="danger" *ngIf="mailAlreadyTaken"> Cette adresse mail est déja utilisé par un autre compte</nb-alert>
   </nb-form-field>
-
-  <button nbButton status="danger">S'inscrire</button>
+  <button nbButton  [disabled]="!signUpProfile.valid">S'inscrire</button><p>Vous êtes deja inscrit ? <a routerLink="/auth">Cliquez ici</a></p>
 </form>

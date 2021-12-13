@@ -1,24 +1,4 @@
 <nb-layout-column>
-  <nb-card *ngFor="let post of posts$ | async"
-  [postId]="post.id">
-      <nb-card-header>
-        <nb-user size="medium"
-              name="{{post.nom + ' ' + post.prenom}}"
-              color="#cccccc">
-      </nb-user>
-      <span class="post__date">Publié le : {{post.posted_at | date}}</span>
-      <nb-action *ngIf="userId === post.user_id || isAdmin === 1" icon="more-vertical-outline" [nbContextMenu]="items" (click)="getPostId(post.id)" ></nb-action>
-      </nb-card-header>
-      <nb-card-body>
-        {{post.message}}
-        <img *ngIf="post.image" src="{{post.image}}" alt="">
-      </nb-card-body>
-      <nb-card-footer>
-        <nb-actions size="medium">
-          <nb-action (click)="onLike(post.id)"class="like" [icon]="(hasUserLike$ | async) ?'heart' : 'heart-outline' " badgePosition="bottom left" badgeStatus="danger" badgeText="{{post.liked}}"></nb-action>
-          <nb-action icon="message-square-outline" routerLink="/view/{{post.id}}"></nb-action>
-        </nb-actions>
-
-      </nb-card-footer>
-  </nb-card>
+ <app-message *ngFor="let post of posts$ | async" [post]="post"></app-message>
 </nb-layout-column>
+

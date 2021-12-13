@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
-import { FormsModule} from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ import { PostMessageComponent } from './components/post-message/post-message.com
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule, NbPopoverModule, NbContextMenuModule, NbMenuModule, NbMenuService, NbMenuItem, NbActionComponent, NbActionsModule} from '@nebular/theme';
+import { NbUserModule, NbIconModule, NbFormFieldModule, NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbInputModule, NbPopoverModule, NbContextMenuModule, NbMenuModule, NbMenuService, NbMenuItem, NbActionComponent, NbActionsModule, NbAlertModule} from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,9 +19,11 @@ import { ViewMessageComponent } from './components/view-message/view-message.com
 import { AuthComponent } from './components/login/auth.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ViewSingleComponent } from './components/view-single/view-single.component';
-import { TokenInterceptor } from './auth/token.interceptor';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth.guard';
+import { TokenInterceptor } from './interceptor/token.interceptor';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guard/auth.guard';
+import { MessageComponent } from './components/message/message.component';
+import { SingleMessageComponent } from './components/single-message/single-message.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,6 +34,8 @@ import { AuthGuard } from './auth/auth.guard';
     AuthComponent,
     SignUpComponent,
     ViewSingleComponent,
+    MessageComponent,
+    SingleMessageComponent,
   ],
   imports: [
     HttpClientModule,
@@ -52,7 +56,10 @@ import { AuthGuard } from './auth/auth.guard';
     NbPopoverModule,
     NbContextMenuModule,
     NbMenuModule.forRoot(),
-    NbActionsModule
+    NbActionsModule,
+    ReactiveFormsModule,
+    NbAlertModule,
+
   ],
   providers: [
     {
@@ -60,7 +67,7 @@ import { AuthGuard } from './auth/auth.guard';
       useClass: TokenInterceptor,
       multi: true
     },
-    PostService,NbMenuItem, UserService, AuthService, AuthGuard, NbMenuService],
+    PostService,NbMenuItem, UserService, AuthService, AuthGuard, NbMenuService, NbMenuItem],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

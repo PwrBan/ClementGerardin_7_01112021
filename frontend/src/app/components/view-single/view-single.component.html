@@ -1,10 +1,10 @@
-<nb-card *ngFor="let post of post$ | async">
+<nb-card>
   <nb-card-header [postId]="post.nom">
     <nb-user size="medium"
           name="{{post.nom + ' ' + post.prenom}}"
           color="#cccccc">
   </nb-user>
-  <span class="post__date">Publié le : {{post.posted_at | date}}</span>
+  <span class="post__date">{{post.posted_at | date}}</span>
   </nb-card-header>
   <nb-card-body>
     {{post.message}}
@@ -12,12 +12,13 @@
   </nb-card-body>
   <nb-card-footer>
     <nb-actions size="medium">
-      <nb-action (click)="onLike(post.id)"class="like" icon="heart-outline" badgePosition="bottom left" badgeStatus="danger" badgeText="{{post.liked}}"></nb-action>
+      <nb-action (click)="onLike(post.id)" [icon]="(hasUserLike$ | async)?'heart' : 'heart-outline' " badgePosition="bottom left" badgeStatus="danger" badgeText="{{post.liked}}"></nb-action>
+      <nb-action icon="trash-outline" *ngIf="userId === post.user_id || isAdmin === 1" (click)="delete(post.id)"></nb-action>
     </nb-actions>
   </nb-card-footer>
 </nb-card>
 
-  <form (ngSubmit)="onComment(f)" #f="ngForm" *ngFor="let post of post$ | async" class="form-comment">
+  <form (ngSubmit)="onComment(f)" #f="ngForm" class="form-comment">
     <input ngModel name="comment" status="primary" type="text" nbInput shape="round" placeholder="Commentaires" fullWidth>
     <button nbButton shape="round" size="small" status="primary" (click)="getPostId(post.id)" >Envoyer</button>
   </form>
@@ -30,11 +31,11 @@
             name="{{comment.nom + ' ' + comment.prenom}}"
             color="#cccccc">
         </nb-user>
-        <span class="card-comment__date">Publié le : {{comment.date | date }}</span>
+        <span class="card-comment__date">{{comment.date | date }}</span>
+        <nb-action icon="trash-outline" class="delete-comment" *ngIf="userId === post.user_id || isAdmin === 1" (click)="delete(post.id)"></nb-action>
       </div>
     </nb-card-header>
     <nb-card-body class="card-comment">
-
       {{comment.comment}}
     </nb-card-body>
     </nb-card>

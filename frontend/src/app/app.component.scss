@@ -6,9 +6,30 @@
 {
   font-family: 'Outfit', sans-serif;
 }
-h1
+.header
 {
-  justify-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 95%;
+}
+.logo
+{
+  width: 80%;
+  &--mobile
+  {
+    display: none;
+  }
+  @media (max-width:500px) {
+    display: none;
+    &--mobile
+    {
+      display: flex;
+      width: 25%;
+      min-width: 60px;
+      align-items: stretch;
+    }
+  }
 }
 a
 {
@@ -23,7 +44,7 @@ a
   &__mid
   {
     display: none;
-    @media (max-width:700px) and (min-width:350px) {
+    @media (max-width:780px) and (min-width:350px) {
       display: flex;
     }
   }
@@ -40,7 +61,26 @@ a
       color: white!important;
       text-decoration: none;
     }
-    @media (max-width:700px) {
+    @media (max-width:780px) {
       display: none;
+      &__logout
+      {
+        display: block;
+      }
     }
+}
+.post-icon
+{
+  display: flex;
+  font-size: larger;
+  border-radius: 10%;
+  background: $color-primary;
+  padding: .5rem;
+  width: 4rem;
+  justify-content: center;
+  align-items: center;
+  nb-action
+  {
+    color: white;
+  }
 }

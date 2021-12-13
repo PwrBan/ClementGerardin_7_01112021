@@ -1,38 +1,39 @@
 <nb-layout>
 
   <nb-layout-header>
-        <a routerLink="/view"><img src="../assets/images/icon-left-font-monochrome-black.svg" alt=""></a>
+    <div class="header">
+        <a routerLink="/view"><img class="logo"src="../assets/images/icon-left-font-monochrome-black.svg" alt="groupomania logo"><img class="logo--mobile"src="../assets/images/icon.svg" alt="groupomania icone"></a>
         <div class="btn-group">
-          <button nbButton
-            class="btn btn__post"
-            status="primary">
-            <a routerLink="/post">Post</a>
-          </button>
+          <div class="post-icon" *ngIf="isAuth">
+            <nb-actions size="small">
+              <nb-action icon="edit-outline" status="" routerLink="/post"></nb-action>
+            </nb-actions>
+          </div>
           <button nbButton
             class="btn btn__login"
             status="primary"
-            *ngIf="isAuth === false">
+            *ngIf="!isAuth">
             <a routerLink="/auth">Se connecter</a>
           </button>
           <button nbButton
             class="btn btn__signUp"
             status="primary"
-            *ngIf="isAuth === false"
-            >
+            *ngIf="!isAuth">
             <a routerLink="/signUp">S'inscrire</a>
           </button>
           <button nbButton
           status="danger"
-            class="btn btn__signUp"
-            *ngIf="isAuth === true"
+            class="btn btn__logout"
+            *ngIf="isAuth"
             (click) = "onDisconnect()">
             <a routerLink="view">Deconnexion</a>
         </button>
-        <button outline nbButton [nbContextMenu]="items" nbContextMenuTag="my-context-menu" class="btn__mid" status="primary">
+        <button  *ngIf="!isAuth" outline nbButton [nbContextMenu]="items" nbContextMenuTag="menu" class="btn__mid" status="primary">
           Menu
         </button>
-        <button nbButton [nbContextMenu]="items" nbContextMenuTag="my-context-menu" class="btn__mobile"><nb-icon icon="menu"></nb-icon></button>
+        <button *ngIf="!isAuth" nbButton [nbContextMenu]="items" nbContextMenuTag="menu" class="btn__mobile"><nb-icon icon="menu"></nb-icon></button>
       </div>
+    </div>
   </nb-layout-header>
 
     <nb-layout-column>

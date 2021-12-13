@@ -1,10 +1,12 @@
-import { Component, ViewChild} from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/user.model';
 import { NbPopoverDirective } from '@nebular/theme';
+import { FormControl, FormGroup, FormBuilder, Validator} from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './sign-up.component.html',
@@ -12,40 +14,58 @@ import { NbPopoverDirective } from '@nebular/theme';
 })
 
 @Injectable()
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+  public mailAlreadyTaken: boolean = false;
 
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  public signUpProfile: FormGroup;
 
-  constructor( private userService: UserService, private router: Router) { }
+  constructor( private userService: UserService, private router: Router, private fb: FormBuilder) {}
 
   public showPassword = true;
 
+  ngOnInit() {
+    this.signUpProfile = this.fb.group({
+      prenom: ['', Validators.required],
+      nom: ['', Validators.required],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]],
+      email: ['', [Validators.required, Validators.email]]
+    })
+
+
+  }
+  get email(){
+    return this.signUpProfile.get('email');
+  }
+  get password(){
+    return this.signUpProfile.get('password');
+  }
+
   public getInputType() {
     if (this.showPassword) {
-      return 'text';
+      return 'password';
     }
-    return 'password';
+    return 'text';
   }
 
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
-  public onSignUp(form: NgForm) {
-    const user = new User(form.value.nom, form.value.prenom, form.value.email, form.value.password);
+  public onSignUp() {
+    const user = new User(this.signUpProfile.value.nom, this.signUpProfile.value.prenom, this.signUpProfile.value.email, this.signUpProfile.value.password);
     this.userService.signUp(user)
     .subscribe(
       () => {
-        this.router.navigate(['/view']);
+        this.router.navigate(['/auth']);
       },
       (err) => {
-        this.popover.show();
-        setTimeout(() => {
-          this.popover.hide();
-        }, 2000);
-
+        this.mailAlreadyTaken = true;
       })
 
   }
-
 }
+
 

@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AppComponent } from 'src/app/app.component';
 import { NgForm } from '@angular/forms';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { NbPopoverDirective } from '@nebular/theme';
 
 @Component({
@@ -41,7 +41,7 @@ export class AuthComponent  {
           'userId' : result[0].userId,
           'token' : result[0].token
         }
-        sessionStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(user))
         this.authService.isConnected();
         this.appComponent.isAuth = true;
         this.router.navigate(['view']);

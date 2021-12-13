@@ -22,24 +22,6 @@ nb-card-header
     margin: 0 5%;
   }
 }
-:host nb-icon{
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-    font-size: 1.5rem;
-    background-position: bottom;
-    background: linear-gradient(to bottom,transparent 33%, $color-primary, $color-secondary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    transition: all 200ms ease-in;
-    background-size: 100% 200%;
-    &:hover
-    {
-      background-position: bottom;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-stroke-color: transparent;
-    }
-}
 nb-card-body
 {
   display: flex;
@@ -52,15 +34,14 @@ nb-card-body
 nb-card-footer
 {
   display: flex;
-  justify-content: space-between;
-  padding: .5em 5%;
-  div
+  padding: .5em 0;
+  .trash-icon
   {
-    display: flex;
-    align-items: center;
+    margin-right: 5%!important;
   }
-  .link-comment
-  {
-    margin-left: 15%;
+  @media (max-width:330px) {
+    justify-content: center;
   }
 }
+
+

@@ -1,5 +1,5 @@
 export class Post {
-  public id: string;
+  public id: number;
   public nom: string;
   public prenom: string;
   public user_id: number;
