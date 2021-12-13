@@ -31,6 +31,7 @@ const connection = mysql.createConnection({
         const sql = 'DELETE FROM post WHERE id = ?';
         const format = mysql.format(sql, req.params.id);
         connection.query(format, (err, result, field) => {
+            connection.query(mysql.format('DELETE FROM liked WHERE postLiked = ?', req.params.id))
             if(err) res.status(400).json({ message : err});
             res.status(200).json({ message : "post supprimé"});
         })
@@ -101,7 +102,7 @@ const connection = mysql.createConnection({
         })
     }
     exports.findAllLikes = (req,res, next) => {
-        connection.query(mysql.format('SELECT postLiked FROM liked WHERE userLiked = ?', req.params.id), (err, result, fields) => {
+        connection.query(mysql.format('SELECT * FROM liked WHERE userLiked = ?', req.params.id), (err, result, fields) => {
             if(err) res.status(400).json({ message : err });
             res.status(200).json({ result })
             } )

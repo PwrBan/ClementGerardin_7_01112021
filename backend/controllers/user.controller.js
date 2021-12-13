@@ -2,12 +2,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const mysql = require('mysql');
-const key = fs.readFileSync('./environment/private.key');
+const dbKey = fs.readFileSync('./environment/private.key');
+const tokenKey = fs.readFileSync('./environment/private-token.key')
+
 const passwordValidator = require('password-validator');
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: key,
+    password: dbKey,
     database:  "groupomania"
   })
 
@@ -45,7 +47,6 @@ exports.login = (req, res, next) => {
                 if(!valid) {
                 return  res.status(400).json({message: "Email ou mot de passe incorrect"}); 
             }
-            console.log(result[0].isAdmin);
                 const user = {
                     prenom: result[0].prenom,
                     nom: result[0].nom,
@@ -54,7 +55,7 @@ exports.login = (req, res, next) => {
                     token: jwt.sign(
                         { userId: result[0].id,
                         admin: result[0].isAdmin},
-                        'SECRET_KEY',
+                        tokenKey,
                         {expiresIn: '24h'}
                     )
                 }

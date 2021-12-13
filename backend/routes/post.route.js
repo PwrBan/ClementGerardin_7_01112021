@@ -13,7 +13,7 @@ router.get('/:id', postCtrl.findById);
 router.get('/:id/comments', postCtrl.findAllComments);
 router.get('/:id/like', postCtrl.findAllLikes);
 router.put('/:id/like', postCtrl.like);
-router.delete('/:id',auth, postCtrl.delete)
+router.delete('/:id',auth, postCtrl.delete);
 
 
 
