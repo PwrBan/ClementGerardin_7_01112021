@@ -13,7 +13,7 @@ import { NbPopoverDirective } from '@nebular/theme';
 })
 export class AuthComponent  {
 
-  constructor(private router: Router, private userService: UserService, private appComponent: AppComponent, private authService: AuthService) { }
+  constructor(private readonly router: Router, private readonly userService: UserService, private appComponent: AppComponent, private authService: AuthService) { }
 
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
@@ -26,20 +26,20 @@ export class AuthComponent  {
     return 'password';
   }
 
-  toggleShowPassword() {
+  public toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
-  onLogin(form: NgForm) {
+  public onLogin(form: NgForm) {
     this.userService.login(form.value.email, form.value.password)
     .subscribe(
       (res) => {
         const result = Object.values(res);
         const user = {
-          'prenom' : result[0].prenom,
-          'nom' : result[0].nom,
-          'email' : result[0].email,
-          'userId' : result[0].userId,
-          'token' : result[0].token
+          prenom: result[0].prenom,
+          nom: result[0].nom,
+          email: result[0].email,
+          userId: result[0].userId,
+          token: result[0].token
         }
         localStorage.setItem('user', JSON.stringify(user))
         this.authService.isConnected();
