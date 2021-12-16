@@ -19,21 +19,23 @@ Cloner ce repository avec la commande :
 Dans le dossier Frontend et backend exécuter la commande : <br>
 <pre>npm install</pre>
 Dans le dossier environment, vous trouverez deux fichier .key <br>
-a l'interieur de private.key, tapez votre mot de passe MySql <br>
-a l'interieur de private-token.key, tapez la clef de déchiffrement de jwt de votre choix<br>
+à l'interieur de private.key, tapez votre mot de passe MySql <br>
+à l'interieur de private-token.key, tapez la clef de déchiffrement de jwt de votre choix<br>
 
-Pour lancer le serveur, executer cette commande dans le dossier 'backend' : 
+Pour lancer le serveur, exécuter cette commande dans le dossier 'backend' : 
 <pre> node server </pre>
-Pour compiler et lancer le projet dans le navigateur, executer cette commande dans le dossier 'frontend' :
+Pour compiler et lancer le projet dans le navigateur, exécuter cette commande dans le dossier 'frontend' :
 <pre> ng serve -o </pre>
 
 <h3>MySql</h3>
-Ouvrez le terminal MySql et connectez vous a l'aide de votre mot de passe <br>
+Ouvrez le terminal MySql et connectez vous à l'aide de votre mot de passe <br>
 Créer une base de données : 
 <pre>CREATE DATABASE groupomania; </pre>
-Ensuite importez la bdd:
+Ensuite importez les tables:
 <pre>source groupomania.sql; </pre>
-devant groupomania.sql specifier le chemin d'accés
+devant groupomania.sql specifier le chemin d'accés.
+
+Le site est maintenant fonctionnel. 
 
 
 
