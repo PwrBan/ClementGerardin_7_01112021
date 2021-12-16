@@ -42,6 +42,7 @@ exports.login = (req, res, next) => {
     const inserts = [req.body.email];
     const format = mysql.format(sql, inserts);
     connection.query(format, (err, result, fields) => {
+        if(result[0]){
         bcrypt.compare(req.body.password, result[0].password)
             .then( valid => {
                 if(!valid) {
@@ -62,7 +63,10 @@ exports.login = (req, res, next) => {
                 res.status(200).json({ user })
             })
             .catch(err => res.status(500).json({ err }))
-    })
+    } else {
+        return res.status(400)
+    }
+})
 }
 
 
