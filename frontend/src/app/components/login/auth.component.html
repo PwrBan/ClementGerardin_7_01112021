@@ -2,14 +2,14 @@
   <form (ngSubmit)="onLogin(f)" #f="ngForm">
     <input  name="email" ngModel class="input" type="text" status="primary" nbInput fullWidth shape="round" placeholder="Adresse email">
     <nb-form-field>
-      <input type="password" nbInput fullWidth shape="round" ngModel
+      <input type="password" nbInput fullWidth shape="round" ngModel status="primary"
       name="password"
       placeholder="Mot de passe">
     </nb-form-field>
 
     <button nbButton
     shape="semi-round"
-    status="info"
+    status="primary"
     nbPopover="Email ou mot de passe erroné"
     nbPopoverPlacement="end">
     Se connecter</button>

@@ -54,7 +54,8 @@ export class ViewSingleComponent{
       })
       console.log(f.value.comment);
       this.postService.createComments(comment)
-      .pipe(first())
+      .pipe(
+      first())
       .subscribe(() => {
         location.reload()
       },

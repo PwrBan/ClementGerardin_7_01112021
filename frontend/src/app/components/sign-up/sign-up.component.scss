@@ -1,7 +1,10 @@
+@import '../../sass/_variables';
+
 h1
 {
   display: flex;
   justify-content: center;
+  color: $color-tertiary;
 }
 form
 {

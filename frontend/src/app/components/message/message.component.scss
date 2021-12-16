@@ -1,0 +1,45 @@
+@import '../../sass/font';
+@import '../../sass/_variables';
+
+a
+  {
+    text-decoration: none;
+  }
+nb-card
+{
+  margin: 5% 10%;
+
+}
+nb-card-header
+{
+  display: flex;
+  align-items: center;
+  padding: .5rem 1rem;
+  justify-content: space-between;
+  .post__date
+  {
+    font-size: x-small;
+    margin: 0 5%;
+  }
+}
+nb-card-body
+{
+  display: flex;
+  flex-direction: column;
+  img
+  {
+    padding-top: 5%;
+  }
+}
+nb-card-footer
+{
+  display: flex;
+  padding: .5em 0;
+  .trash-icon
+  {
+    margin-right: 5%!important;
+  }
+  @media (max-width:330px) {
+    justify-content: center;
+  }
+}
