@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const fs = require('fs');
 const mysql = require('mysql');
 const key = fs.readFileSync('./environment/private.key');
