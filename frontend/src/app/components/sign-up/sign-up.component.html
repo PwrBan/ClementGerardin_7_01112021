@@ -12,7 +12,7 @@
                         [attr.aria-label]="showPassword ? 'show password' : 'hide password'">
               </nb-icon>
             </button>
-            <nb-alert accent="danger" *ngIf="password?.invalid && password?.touched">Votre mot de passe doit contenir au minimum 1 majuscules, 1 minuscule et 8 caractéres</nb-alert>
+            <nb-alert accent="danger" *ngIf="password?.invalid && password?.touched">Votre mot de passe doit contenir au minimum 1 majuscules, 1 minuscule, 1 chiffre et 8 caractéres</nb-alert>
   </nb-form-field>
   <nb-form-field>
     <input status="primary" name="email" formControlName="email"  type="text" nbInput fullWidth shape="round" placeholder="Adresse mail">

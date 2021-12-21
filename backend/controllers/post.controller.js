@@ -45,6 +45,7 @@ const connection = mysql.createConnection({
             res.status(201).json({ message : "Commentaires posté"})
         })
     }
+
     exports.findById = (req, res, next) => {
     const inserts = req.params.id
     const sql = "SELECT * FROM post WHERE id = ? LIMIT 1"
@@ -75,7 +76,6 @@ const connection = mysql.createConnection({
         const selectSql =  'SELECT userLiked FROM liked WHERE postLiked = ? AND userLiked = ?';
         const selectInsert = [req.params.id, req.body[0].userId ]
         const format = mysql.format(selectSql, selectInsert);
-        const insert = req.params.id;
         connection.query(format, (err, result, field) => {
             if(!result[0]) { 
                 const insertSql = 'INSERT INTO liked VALUES (0, ?, ?)';

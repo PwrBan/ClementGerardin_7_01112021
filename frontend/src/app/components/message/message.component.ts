@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Post } from 'src/app/model/post.model';
 import { Like } from 'src/app/model/like.model';
 import { Observable, combineLatest } from 'rxjs';
@@ -14,7 +14,7 @@ import { ifNotNull, softCache } from '@witty-services/rxjs-common';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
-export class MessageComponent {
+export class MessageComponent implements OnInit, OnDestroy {
 
   @Input() public post: Post;
   public readonly hasUserLike$: Observable<boolean>;
@@ -37,6 +37,19 @@ export class MessageComponent {
       this.isAdmin = this.authService.isAdmin
     }
    }
+
+   ngOnInit() {
+    if (!localStorage.getItem('foo')) {
+      localStorage.setItem('foo', 'no reload')
+      location.reload()
+    }
+  }
+  ngOnDestroy(): void {
+      if(localStorage.getItem('foo')) {
+        localStorage.removeItem('foo');
+      }
+  }
+
 
   delete(id: number){
     this.postService.delete(id)

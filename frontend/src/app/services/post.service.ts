@@ -22,7 +22,6 @@ export class PostService {
   }
 
   public findOne(): Observable<Post[]> {
-    console.log('coucou');
     return this.httpClient.get<any[]>('http://localhost:3000/api' + this.router.url)
     .pipe(
       first(),

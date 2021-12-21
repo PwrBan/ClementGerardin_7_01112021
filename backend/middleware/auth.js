@@ -8,7 +8,10 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, tokenKey);
         const userId = decodedToken.userId;
         const isAdmin = decodedToken.admin;
-        if (req.body.userId && req.body.userId !== userId || isAdmin === 0) {
+        if (req.body.userId && req.body.userId !== userId) {
+            if(isAdmin === 1){
+                next();
+            }
             throw "invalid userId";
         } else {
             next();

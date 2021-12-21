@@ -17,25 +17,33 @@ const schema = new passwordValidator();
 
 schema
 .is().min(8)
-.has().uppercase()
-.has().lowercase()
+.has().uppercase(1)
+.has().lowercase(1)
 .has().digits(1)
 .has().not().spaces();
 
 exports.signup = (req, res, next) => {
-    if(schema.validate(req.body.password)){
-        bcrypt.hash(req.body.password, 10)
-    .then((hash) => {
-        const sql = "INSERT INTO user VALUES (0,?,?,?,?,?)";
-        const inserts = [req.body.prenom, req.body.nom, req.body.email ,hash, false];
-        const format = mysql.format(sql, inserts);
-        connection.query(format);
-    })
-    .then(() => res.status(201).json({ message : 'Utilisateur enregistré'}))
-    .catch((err) => res.status(400).json({ message : err }))
-    } else {
-        throw 'Mot de passe trop faible.'
-    }
+    connection.query("SELECT COUNT(email) AS email FROM user WHERE email = ?", req.body.email, (err, result, field) => {
+        if(result[0].email === 0){
+            if(schema.validate(req.body.password)){
+                bcrypt.hash(req.body.password, 10)
+            .then((hash) => {
+                const sql = "INSERT INTO user VALUES (0,?,?,?,?,?)";
+                const inserts = [req.body.prenom, req.body.nom, req.body.email ,hash, false];
+                const format = mysql.format(sql, inserts);
+                connection.query(format);
+            })
+            .then(() => res.status(201).json({ message : 'Utilisateur enregistré'}))
+            .catch((err) => res.status(400).json({ message : err }))
+            } else {
+                throw 'Mot de passe trop faible.'
+            }
+        } else {
+            res.status(400).json({ message : "Adresse mail deja existante"})
+        }
+        })
+        
+    
 }
 exports.login = (req, res, next) => {
     const sql = "SELECT nom, id, prenom, email, password, isAdmin FROM user WHERE email = ? LIMIT 1";

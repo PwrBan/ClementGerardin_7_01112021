@@ -29,6 +29,10 @@ export class AuthComponent  {
   public toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
+
+  refresh(){
+    location.reload();
+  }
   public onLogin(form: NgForm) {
     this.userService.login(form.value.email, form.value.password)
     .subscribe(
@@ -44,7 +48,8 @@ export class AuthComponent  {
         localStorage.setItem('user', JSON.stringify(user))
         this.authService.isConnected();
         this.appComponent.isAuth = true;
-        this.router.navigate(['view']);
+        this.router.navigate(['/view']);
+
       },
       (err) => {
         this.popover.show()

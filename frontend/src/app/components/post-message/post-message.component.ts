@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-post-message',
   templateUrl: './post-message.component.html',
-  styleUrls: ['./post-message.component.scss']
 })
 export class PostMessageComponent {
 
@@ -18,8 +17,6 @@ export class PostMessageComponent {
 
   public onFileSelected(event: any) {
     this.file = event.target.files[0]
-    console.log(this.file);
-
     if(this.file) {
       this.formData.append("thumbnail", this.file)
     }
