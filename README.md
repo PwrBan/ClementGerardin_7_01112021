@@ -20,7 +20,7 @@ Dans le dossier Frontend et backend exécuter la commande : <br>
 <pre>npm install</pre>
 Dans le dossier environment, vous trouverez deux fichier .key <br>
 à l'interieur de private.key, tapez votre mot de passe MySql <br>
-à l'interieur de private-token.key, tapez la clef de déchiffrement de jwt de votre choix<br>
+à l'interieur de private-token.key, tapez la clef de chiffrement de jwt de votre choix<br>
 
 Pour lancer le serveur, exécuter cette commande dans le dossier 'backend' : 
 <pre> node server </pre>
